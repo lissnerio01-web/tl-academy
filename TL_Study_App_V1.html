@@ -1,0 +1,113 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TL Study App</title>
+<style>
+body{font-family:Arial;margin:0;background:#121212;color:#fff}
+.header{padding:18px;text-align:center;background:#1e1e1e}
+.screen{padding:15px}
+.btn{display:block;width:100%;padding:14px;margin:10px 0;border:none;border-radius:12px;font-size:16px}
+.card{background:#222;padding:15px;border-radius:12px}
+.option{background:#333;color:white}
+.next{background:#555;color:white}
+.hidden{display:none}
+.progress{height:12px;background:#333;border-radius:8px;margin:10px 0}
+.bar{height:100%;background:#999;border-radius:8px}
+</style>
+</head>
+<body>
+
+<div class="header">
+<h2>📱 TL Study App</h2>
+<p>Lisseth & Frank Edition</p>
+</div>
+
+<div id="home" class="screen">
+<div class="card">
+<h3>Selecciona una categoría</h3>
+<button class="btn option" onclick="startQuiz('operaciones')">📊 Operaciones</button>
+<button class="btn option" onclick="startQuiz('leadership')">👥 Leadership</button>
+<button class="btn option" onclick="startQuiz('comunicacion')">💼 Comunicación</button>
+<button class="btn option" onclick="startQuiz('all')">🎯 Quiz Mixto</button>
+</div>
+</div>
+
+<div id="quiz" class="screen hidden">
+<div class="progress"><div id="bar" class="bar"></div></div>
+<div class="card">
+<h3 id="q"></h3>
+<div id="answers"></div>
+<div id="feedback"></div>
+<button id="nextBtn" class="btn next hidden" onclick="nextQ()">Siguiente</button>
+</div>
+</div>
+
+<script>
+const data={
+operaciones:[
+{q:"¿Qué significa OTF?",a:["Offer to Forecast","Over Time Forecast","Outbound Transfer Flow","Operational Task Flow"],c:0,e:"OTF compara el volumen real contra el pronosticado."},
+{q:"¿Qué métrica mide el tiempo activo del agente?",a:["SL","OCC","SNPS","FTE"],c:1,e:"Occupancy mide el tiempo ocupado del agente."},
+{q:"¿Qué significa FTE?",a:["Full Time Equivalent","Final Team Evaluation","Forecast Team Effort","Flexible Time Employee"],c:0,e:"Representa la carga equivalente a un empleado de tiempo completo."}
+],
+leadership:[
+{q:"¿Qué método propone Kim Scott?",a:["GROW","STAR","Radical Candor","SMARTER"],c:2,e:"Radical Candor combina feedback directo y preocupación genuina."},
+{q:"¿Qué es clave para retener talento?",a:["Micromanagement","Comunicación y reconocimiento","Control estricto","Menos feedback"],c:1,e:"La comunicación y el reconocimiento fortalecen el compromiso."},
+{q:"¿La empatía elimina conversaciones difíciles?",a:["Sí","No"],c:1,e:"La empatía ayuda a tener conversaciones difíciles de forma humana."}
+],
+comunicacion:[
+{q:"¿Qué debe evitarse en correos profesionales?",a:["Lenguaje técnico","Humor o ironía","Saludos","Firma"],c:1,e:"El humor puede causar malentendidos."},
+{q:"¿Cuándo usar copia oculta?",a:["Correos masivos","Siempre","Nunca","Solo con clientes"],c:0,e:"Protege la privacidad de los destinatarios."},
+{q:"¿Cuál es una ventaja de las videoconferencias?",a:["Compartir pantalla","Reducir correos","Eliminar reuniones","Más pausas"],c:0,e:"Permiten compartir documentos y pantalla."}
+]
+};
+
+let questions=[],i=0,score=0;
+
+function startQuiz(cat){
+questions = cat==="all" ? [...data.operaciones,...data.leadership,...data.comunicacion] : data[cat];
+questions = questions.sort(()=>Math.random()-0.5);
+i=0; score=0;
+home.classList.add("hidden");
+quiz.classList.remove("hidden");
+render();
+}
+
+function render(){
+let q=questions[i];
+bar.style.width=((i/questions.length)*100)+"%";
+document.getElementById("q").innerText=q.q;
+feedback.innerHTML="";
+nextBtn.classList.add("hidden");
+answers.innerHTML="";
+q.a.forEach((t,n)=>{
+let b=document.createElement("button");
+b.className="btn option";
+b.innerText=t;
+b.onclick=()=>answer(n);
+answers.appendChild(b);
+});
+}
+
+function answer(n){
+let q=questions[i];
+let ok=n===q.c;
+if(ok) score++;
+feedback.innerHTML=(ok?"✅ Correcto":"❌ Incorrecto")+"<br><br><b>Explicación:</b> "+q.e;
+nextBtn.classList.remove("hidden");
+answers.innerHTML="";
+}
+
+function nextQ(){
+i++;
+if(i>=questions.length){
+quiz.innerHTML=`<div class='card'><h2>Resultado</h2><h1>${score}/${questions.length}</h1><h3>${Math.round(score/questions.length*100)}%</h3><button class='btn option' onclick='location.reload()'>Volver al inicio</button></div>`;
+return;
+}
+render();
+}
+</script>
+</body>
+</html>

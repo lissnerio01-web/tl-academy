@@ -1,0 +1,27 @@
+<!DOCTYPE html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>Interview Master V1</title>
+<style>
+body{font-family:Arial;background:#111;color:#fff;margin:0}
+.box{max-width:700px;margin:auto;padding:15px}
+.card{background:#222;padding:15px;border-radius:12px}
+button{width:100%;padding:12px;margin:6px 0;border:none;border-radius:10px}
+</style></head><body><div class='box'><div id='app' class='card'></div></div>
+<script>
+const q=[{"cat": "Entrevistas", "q": "¿Cuál es el objetivo principal de una entrevista?", "a": ["Interrogar", "Obtener información sobre competencias y experiencia", "Completar formularios", "Negociar salario"], "c": 1, "e": "Busca conocer si la persona se adapta al puesto y la cultura."}, {"cat": "Entrevistas", "q": "Una entrevista es principalmente:", "a": ["Un interrogatorio", "Un diálogo", "Una auditoría", "Una capacitación"], "c": 1, "e": "Entrevistador y candidato resuelven inquietudes mutuas."}, {"cat": "Entrevistas", "q": "¿Qué permite evaluar la comunicación no verbal?", "a": ["CV", "Entrevista", "Examen técnico", "Correo"], "c": 1, "e": "La interacción permite observar comportamientos."}, {"cat": "Puesto", "q": "¿Qué contiene una descripción de puesto?", "a": ["Conocimientos, habilidades y experiencia", "Solo salario", "Solo tareas", "Solo horario"], "c": 0, "e": "Define los requisitos para el rol."}, {"cat": "Puesto", "q": "La descripción del puesto debe ser:", "a": ["General", "Específica", "Ambigua", "Breve"], "c": 1, "e": "Mientras más específica, mejor."}, {"cat": "Competencias", "q": "Las competencias incluyen:", "a": ["Conocimientos, habilidades y actitudes", "Solo experiencia", "Solo estudios", "Solo resultados"], "c": 0, "e": "Son clave para el desempeño."}, {"cat": "STAR", "q": "La S en STAR significa:", "a": ["Situation", "Success", "Skill", "Standard"], "c": 0, "e": "Situation describe el contexto."}, {"cat": "STAR", "q": "La T en STAR significa:", "a": ["Target", "Task", "Talent", "Time"], "c": 1, "e": "Task es la responsabilidad."}, {"cat": "STAR", "q": "La A en STAR significa:", "a": ["Assessment", "Action", "Ability", "Achievement"], "c": 1, "e": "Action explica qué hizo la persona."}, {"cat": "STAR", "q": "La R en STAR significa:", "a": ["Review", "Result", "Reason", "Response"], "c": 1, "e": "Result muestra el impacto."}, {"cat": "Preparación", "q": "Un entrevistador debe prepararse antes de la entrevista.", "a": ["Verdadero", "Falso"], "c": 0, "e": "La preparación mejora la evaluación."}, {"cat": "Preparación", "q": "¿Qué debe estudiar primero el entrevistador?", "a": ["Descripción del puesto", "Redes sociales", "Salario", "Uniforme"], "c": 0, "e": "Es la base de la entrevista."}, {"cat": "Assessment", "q": "¿Qué evalúa un Assessment Center?", "a": ["Competencias y potencial", "Solo experiencia", "Solo CV", "Solo asistencia"], "c": 0, "e": "Busca evidencias conductuales."}, {"cat": "Casos", "q": "Un candidato usa ejemplos reales y resultados. ¿Qué método usa?", "a": ["STAR", "QA", "SNPS", "OTF"], "c": 0, "e": "Está usando STAR."}, {"cat": "Casos", "q": "¿Qué es más importante durante una entrevista?", "a": ["Escuchar activamente", "Hablar todo el tiempo", "Leer CV", "Tomar café"], "c": 0, "e": "Escuchar ayuda a obtener información."}, {"cat": "Casos", "q": "¿Qué debe evitar un entrevistador?", "a": ["Prejuicios", "Preguntas", "Escuchar", "Tomar notas"], "c": 0, "e": "Los sesgos afectan la selección."}, {"cat": "Casos", "q": "¿Por qué importa la cultura organizacional?", "a": ["Afecta adaptación y desempeño", "Cambia salarios", "Elimina entrevistas", "No importa"], "c": 0, "e": "La adaptación cultural es importante."}];
+let i=0,s=0;
+function draw(){
+ if(i>=q.length){
+  app.innerHTML='<h1>🎤 Interview Master</h1><h2>'+s+'/'+q.length+'</h2><h3>'+Math.round(s/q.length*100)+'%</h3><button onclick="location.reload()">Reiniciar</button>';
+  return;
+ }
+ let x=q[i];
+ let h='<h2>🎤 Interview Master V1</h2><p><b>'+x.cat+'</b> | '+(i+1)+'/'+q.length+'</p><h3>'+x.q+'</h3>';
+ x.a.forEach(function(v,n){h+='<button onclick="ans('+n+')">'+v+'</button>';});
+ app.innerHTML=h;
+}
+function ans(n){
+ let x=q[i]; let ok=n===x.c; if(ok)s++;
+ app.innerHTML += '<hr><h3>'+(ok?'✅ Correcto':'❌ Incorrecto')+'</h3><p>'+x.e+'</p><button onclick="i++;draw()">Siguiente</button>';
+}
+draw();
+</script></body></html>
