@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz Manager V2</title>
+
+<style>
+body{
+font-family:Arial,sans-serif;
+background:#121212;
+color:white;
+max-width:900px;
+margin:auto;
+padding:20px;
+}
+
+.card{
+background:#1f1f1f;
+padding:20px;
+border-radius:12px;
+}
+
+button{
+width:100%;
+margin:8px 0;
+padding:12px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-size:16px;
+}
+
+.next{
+background:#1976d2;
+color:white;
+}
+
+.progress{
+margin-bottom:15px;
+font-size:18px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>⭐ Quiz Manager V2</h1>
+
+<div id="quiz" class="card"></div>
+
+<script>
+
+const questions = [
+
+{
+question:"¿Qué porcentaje de las razones por las que los empleados se van son evitables?",
+options:["25%","50%","77%","90%"],
+correct:2,
+explanation:"El material indica que aproximadamente el 77% son evitables."
+},
+
+{
+question:"Retener talento significa:",
+options:["Solo permanecer","Construir compromiso","Aumentar salarios","Evitar despidos"],
+correct:1,
+explanation:"La retención implica compromiso y motivación."
+},
+
+{
+question:"¿Qué es Radical Candor?",
+options:["Solo elogios","Solo críticas","Cuidado personal + feedback directo","Control estricto"],
+correct:2,
+explanation:"Radical Candor combina empatía y sinceridad."
+},
+
+{
+question:"La empatía consiste en:",
+options:["Dar siempre la razón","Comprender emociones","Evitar conflictos","Ser permisivo"],
+correct:1,
+explanation:"Empatía es comprender emociones sin evitar conversaciones difíciles."
+},
+
+{
+question:"La escucha activa ayuda a:",
+options:["Detectar problemas","Reducir creatividad","Evitar opiniones","Aumentar control"],
+correct:0,
+explanation:"Permite identificar señales antes de que escalen."
+}
+
+];
+
+let current=0;
+let score=0;
+
+function renderQuestion(){
+
+if(current>=questions.length){
+
+document.getElementById("quiz").innerHTML=
+`
+<h2>🏆 Resultado Final</h2>
+<h3>${score} / ${questions.length}</h3>
+<h3>${Math.round(score/questions.length*100)}%</h3>
+<button onclick="location.reload()">Reiniciar</button>
+`;
+
+return;
+}
+
+const q=questions[current];
+
+let html=`
+<div class="progress">
+Pregunta ${current+1} de ${questions.length}
+</div>
+
+<h2>${q.question}</h2>
+`;
+
+q.options.forEach((option,index)=>{
+html+=`
+<button onclick="answer(${index})">
+${option}
+</button>
+`;
+});
+
+html+=`<div id="feedback"></div>`;
+
+document.getElementById("quiz").innerHTML=html;
+
+}
+
+function answer(selected){
+
+const q=questions[current];
+
+let correct=selected===q.correct;
+
+if(correct) score++;
+
+document.getElementById("feedback").innerHTML=
+`
+<hr>
+<h3>${correct ? "✅ Correcto" : "❌ Incorrecto"}</h3>
+<p>${q.explanation}</p>
+<button class="next" onclick="nextQuestion()">
+Siguiente
+</button>
+`;
+
+}
+
+function nextQuestion(){
+current++;
+renderQuestion();
+}
+
+renderQuestion();
+
+</script>
+
+</body>
+</html>
