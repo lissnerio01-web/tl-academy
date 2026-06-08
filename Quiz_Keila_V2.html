@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz Keila V2</title>
+
+<style>
+body{
+font-family:Arial,sans-serif;
+background:#121212;
+color:white;
+max-width:900px;
+margin:auto;
+padding:20px;
+}
+
+.card{
+background:#1f1f1f;
+padding:20px;
+border-radius:12px;
+}
+
+button{
+width:100%;
+margin:8px 0;
+padding:12px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-size:16px;
+}
+
+.correct{
+background:#2e7d32;
+color:white;
+}
+
+.incorrect{
+background:#c62828;
+color:white;
+}
+
+.next{
+background:#1976d2;
+color:white;
+}
+
+.progress{
+margin-bottom:15px;
+font-size:18px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🎯 Quiz Keila V2</h1>
+
+<div id="quiz" class="card"></div>
+
+<script>
+
+const questions = [
+
+{
+question:"¿Qué significa SL?",
+options:["Service Level","Support Line","Standard Level","Service Load"],
+correct:0,
+explanation:"SL significa Service Level."
+},
+
+{
+question:"¿Qué significa AHT?",
+options:["Average Handle Time","Action Handling Tool","Average Hold Transfer","Agent Help Tool"],
+correct:0,
+explanation:"AHT es el tiempo promedio de manejo."
+},
+
+{
+question:"¿Qué representa FTE?",
+options:["Forecast Team Efficiency","Full Time Equivalent","Final Team Evaluation","Field Task Estimate"],
+correct:1,
+explanation:"FTE representa Full Time Equivalent."
+},
+
+{
+question:"¿Qué significa OTF?",
+options:["Offer To Forecast","Over Time Forecast","Outbound Transfer Flow","Operational Task Flow"],
+correct:0,
+explanation:"OTF compara volumen real versus forecast."
+},
+
+{
+question:"¿Qué mide OCC?",
+options:["Calidad","Ocupación","Rotación","Ausentismo"],
+correct:1,
+explanation:"OCC mide ocupación."
+}
+
+];
+
+let current=0;
+let score=0;
+
+function renderQuestion(){
+
+if(current>=questions.length){
+
+document.getElementById("quiz").innerHTML=
+`
+<h2>🏆 Resultado Final</h2>
+<h3>${score} / ${questions.length}</h3>
+<h3>${Math.round(score/questions.length*100)}%</h3>
+<button onclick="location.reload()">Reiniciar</button>
+`;
+
+return;
+}
+
+const q=questions[current];
+
+let html=`
+<div class="progress">
+Pregunta ${current+1} de ${questions.length}
+</div>
+
+<h2>${q.question}</h2>
+`;
+
+q.options.forEach((option,index)=>{
+html+=`
+<button onclick="answer(${index})">
+${option}
+</button>
+`;
+});
+
+html+=`<div id="feedback"></div>`;
+
+document.getElementById("quiz").innerHTML=html;
+
+}
+
+function answer(selected){
+
+const q=questions[current];
+
+let correct=selected===q.correct;
+
+if(correct) score++;
+
+document.getElementById("feedback").innerHTML=
+`
+<hr>
+<h3>${correct ? "✅ Correcto" : "❌ Incorrecto"}</h3>
+<p>${q.explanation}</p>
+<button class="next" onclick="nextQuestion()">
+Siguiente
+</button>
+`;
+
+}
+
+function nextQuestion(){
+current++;
+renderQuestion();
+}
+
+renderQuestion();
+
+</script>
+
+</body>
+</html>
