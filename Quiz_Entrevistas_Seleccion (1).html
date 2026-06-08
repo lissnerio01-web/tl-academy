@@ -1,0 +1,29 @@
+
+<!DOCTYPE html><html><head><meta charset='utf-8'>
+<title>Quiz Entrevistas y Selección</title>
+<style>
+body{font-family:Arial;max-width:900px;margin:auto;padding:20px}
+button{margin:6px;padding:10px 14px}
+.card{border:1px solid #ddd;border-radius:12px;padding:20px}
+</style></head><body>
+<h1>Quiz: Entrevistas y Selección de Personal</h1>
+<p>35 preguntas basadas en el material.</p>
+<div id='app' class='card'></div>
+<script>
+const q=[('¿Cuál es el objetivo principal de una entrevista de selección?', ['Negociar salario', 'Obtener información sobre competencias y experiencia', 'Firmar contrato', 'Evaluar solo estudios'], 1), ('La entrevista debe ser vista principalmente como:', ['Un interrogatorio', 'Una auditoría', 'Un diálogo', 'Una prueba escrita'], 2), ('¿Qué permite analizar además del CV?', ['Comunicación verbal y no verbal', 'Solo experiencia', 'Solo estudios', 'Solo referencias'], 0), ('¿Por qué es importante una descripción de puesto?', ['Para decorar la vacante', 'Para conocer competencias requeridas', 'Para reducir salarios', 'Para evitar entrevistas'], 1), ('Una buena descripción de puesto debe ser:', ['General', 'Ambigua', 'Específica', 'Corta'], 2), ('Antes de entrevistar, el primer paso es:', ['Analizar el puesto', 'Llamar referencias', 'Aplicar pruebas', 'Enviar oferta'], 0), ('El segundo paso de preparación es:', ['Estudiar al candidato', 'Contratarlo', 'Hacer onboarding', 'Capacitarlo'], 0), ('¿Qué suele verificarse en una preselección telefónica?', ['Expectativas salariales', 'Vacaciones', 'Beneficios', 'Evaluación médica'], 0), ('¿Qué red social se menciona para investigar perfiles?', ['Facebook', 'TikTok', 'LinkedIn', 'Instagram'], 2), ('Las preguntas deben prepararse con anticipación para:', ['Evitar silencios incómodos', 'Hacer la entrevista más larga', 'Reducir candidatos', 'Ninguna'], 0), ('El ambiente ideal de entrevista debe ser:', ['Tenso', 'Confortable', 'Competitivo', 'Silencioso'], 1), ('¿Qué información debe recibir el candidato al ser convocado?', ['Día, lugar, hora y entrevistador', 'Solo la hora', 'Solo el salario', 'Nada'], 0), ('Las tres C de la entrevista son:', ['Calidad, costo y control', 'Confianza, comunicación y conocimiento', 'Cambio, compromiso y control', 'Carrera, cultura y coaching'], 1), ('¿Qué ayuda a generar confianza al inicio?', ['Presentarse y explicar el proceso', 'Empezar con preguntas difíciles', 'Guardar silencio', 'Ignorar al candidato'], 0), ('Las preguntas imprevistas pueden:', ['Perjudicar siempre', 'Revelar información valiosa', 'Invalidar la entrevista', 'Reducir objetividad'], 1), ('Al cierre debe darse espacio para:', ['Preguntas del candidato', 'Más exámenes', 'Firmar contrato', 'Negociar vacaciones'], 0), ('Después de la entrevista se recomienda:', ['Analizar notas y observaciones', 'Olvidar detalles', 'Esperar semanas', 'Eliminar registros'], 0), ('La entrevista individual se realiza entre:', ['Dos personas', 'Tres personas', 'Un grupo', 'Un panel grande'], 0), ('La entrevista dirigida se caracteriza por:', ['Preguntas estructuradas', 'Ausencia de guion', 'Role play', 'Debate grupal'], 0), ('La entrevista abierta busca:', ['Que el candidato se explaye libremente', 'Seguir un formulario rígido', 'Aplicar exámenes', 'Tomar decisiones rápidas'], 0), ('La entrevista semidirigida combina:', ['Entrevista abierta y dirigida', 'Prueba y examen', 'Panel y dinámica', 'Ninguna'], 0), ('La entrevista grupal permite observar:', ['Liderazgo y trabajo en equipo', 'Solo conocimientos técnicos', 'Solo puntualidad', 'Solo experiencia'], 0), ('¿Cómo se conoce la metodología usada en entrevistas grupales?', ['Assessment Center', 'Lean', 'SCRUM', 'Six Sigma'], 0), ('El Assessment Center surgió durante:', ['La Segunda Guerra Mundial', 'La Revolución Industrial', 'Los años 2000', 'La Edad Media'], 0), ('¿Qué evalúan los role play?', ['Comunicación y toma de decisiones', 'Solo memoria', 'Ortografía', 'Velocidad de escritura'], 0), ('La entrevista por competencias busca:', ['Conductas pasadas y evidencias', 'Opiniones hipotéticas', 'Solo títulos académicos', 'Resultados de pruebas'], 0), ('David McClelland es reconocido por:', ['Impulsar entrevistas por competencias', 'Crear LinkedIn', 'Inventar Assessment Center', 'Diseñar CVs'], 0), ('Según Levy-Leboyer, las competencias son:', ['Comportamientos observables', 'Títulos universitarios', 'Pruebas psicométricas', 'Referencias'], 0), ("¿Qué significa el componente 'Saber Hacer'?", ['Aplicar conocimientos', 'Actitudes', 'Trabajo en equipo', 'Formación académica'], 0), ('En STAR, la letra S significa:', ['Situación', 'Solución', 'Sistema', 'Síntesis'], 0), ('En STAR, la letra T significa:', ['Tarea', 'Tiempo', 'Talento', 'Técnica'], 0), ('En STAR, la letra A significa:', ['Acción', 'Análisis', 'Aptitud', 'Actitud'], 0), ('En STAR, la letra R significa:', ['Resultado', 'Reporte', 'Reacción', 'Rol'], 0), ("¿Qué dimensión corresponde al 'Saber Estar'?", ['Participativa', 'Técnica', 'Metodológica', 'Académica'], 0), ("¿Qué dimensión corresponde al 'Saber Ser'?", ['Actitudes y valores', 'Conocimientos', 'Métodos', 'Experiencia'], 0)];
+let i=0,s=0;
+function render(){
+ if(i>=q.length){
+  app.innerHTML=`<h2>Puntaje: ${s}/${q.length}</h2><h3>${Math.round(s/q.length*100)}%</h3><button onclick='location.reload()'>Reiniciar</button>`;return;
+ }
+ let x=q[i];
+ let h=`<h3>Pregunta ${i+1} de ${q.length}</h3><p><b>${x[0]}</b></p>`;
+ x[1].forEach((a,n)=>h+=`<button onclick='ans(${n})'>${a}</button><br>`);
+ app.innerHTML=h;
+}
+function ans(n){
+ let ok=n===q[i][2]; if(ok)s++;
+ app.innerHTML+=`<hr><h3>${ok?'✅ Correcto':'❌ Incorrecto'}</h3><button onclick='i++;render()'>Siguiente</button>`;
+}
+render();
+</script></body></html>
