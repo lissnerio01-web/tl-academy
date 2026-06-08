@@ -1,0 +1,182 @@
+const questions = [
+{
+question:"¿Qué porcentaje de las razones por las que los empleados se van son evitables?",
+options:["25%","50%","77%","90%"],
+correct:2,
+explanation:"El material indica que aproximadamente el 77% de las causas son evitables."
+},
+{
+question:"Retener talento significa:",
+options:["Permanecer en la empresa","Construir compromiso y motivación","Aumentar salarios","Evitar despidos"],
+correct:1,
+explanation:"La retención va más allá de permanecer; implica compromiso."
+},
+{
+question:"Reemplazar a un empleado puede costar:",
+options:["10%-20%","25%-50%","50%-200%","300%-400%"],
+correct:2,
+explanation:"La sustitución puede costar hasta dos veces el salario anual."
+},
+{
+question:"¿Cuál NO es un factor clave de retención?",
+options:["Comunicación","Reconocimiento","Desarrollo","Micromanagement"],
+correct:3,
+explanation:"El micromanagement aumenta la rotación."
+},
+{
+question:"Un líder que nadie quiere dejar:",
+options:["Reconoce y desarrolla","Controla todo","Evita feedback","Ignora emociones"],
+correct:0,
+explanation:"Los líderes efectivos reconocen y desarrollan personas."
+},
+{
+question:"¿Qué es Radical Candor?",
+options:["Solo elogios","Solo críticas","Cuidado personal + feedback directo","Control estricto"],
+correct:2,
+explanation:"Radical Candor combina empatía con sinceridad."
+},
+{
+question:"La empatía consiste en:",
+options:["Dar siempre la razón","Comprender emociones","Evitar conflictos","Ser permisivo"],
+correct:1,
+explanation:"Empatía es comprender emociones sin evitar conversaciones difíciles."
+},
+{
+question:"La escucha activa ayuda a:",
+options:["Detectar problemas","Reducir creatividad","Evitar opiniones","Aumentar control"],
+correct:0,
+explanation:"Permite detectar señales antes de que escalen."
+},
+{
+question:"La confianza se construye mediante:",
+options:["Interés genuino","Más reportes","Más reuniones","Más auditorías"],
+correct:0,
+explanation:"Las relaciones genuinas generan confianza."
+},
+{
+question:"El feedback debe enfocarse en:",
+options:["Personalidad","Acciones","Vida privada","Creencias"],
+correct:1,
+explanation:"Se corrigen conductas, no identidades."
+},
+{
+question:"Growth Mindset significa:",
+options:["Mentalidad fija","Mejora continua","Competencia agresiva","Control"],
+correct:1,
+explanation:"Promueve aprendizaje constante."
+},
+{
+question:"Reconocer logros:",
+options:["Es una pérdida de tiempo","Es liderazgo","Es opcional","Es un gasto"],
+correct:1,
+explanation:"El reconocimiento aumenta compromiso."
+},
+{
+question:"Los equipos diversos suelen:",
+options:["Pensar igual","Tomar mejores decisiones","Tener menos ideas","Reducir innovación"],
+correct:1,
+explanation:"La diversidad mejora la toma de decisiones."
+},
+{
+question:"El balance vida-trabajo beneficia a:",
+options:["Solo empleados","Solo líderes","Todos","Nadie"],
+correct:2,
+explanation:"Beneficia tanto a personas como a la organización."
+},
+{
+question:"Según Daniel Pink la motivación nace de:",
+options:["Control","Autonomía y propósito","Castigo","Dinero únicamente"],
+correct:1,
+explanation:"La motivación intrínseca surge de autonomía y crecimiento."
+},
+{
+question:"Una cultura abierta requiere:",
+options:["Confianza","Jerarquía","Control","Silencio"],
+correct:0,
+explanation:"Sin confianza no existe apertura."
+},
+{
+question:"Escucha silenciosa significa:",
+options:["No escuchar","Escuchar sin interrumpir","Hablar poco","Tomar notas"],
+correct:1,
+explanation:"Implica escuchar completamente."
+},
+{
+question:"Escucha ruidosa implica:",
+options:["Interrumpir","Preguntar y reaccionar","Criticar","Dar órdenes"],
+correct:1,
+explanation:"Involucra interacción activa."
+},
+{
+question:"El líder debe mostrarse:",
+options:["Perfecto","Vulnerable","Distante","Frío"],
+correct:1,
+explanation:"La vulnerabilidad fomenta confianza."
+},
+{
+question:"¿Qué fortalece la retención?",
+options:["Desarrollo profesional","Control","Presión","Competencia interna"],
+correct:0,
+explanation:"Las personas permanecen donde pueden crecer."
+},
+{
+question:"¿Qué genera reconocimiento?",
+options:["Desmotivación","Compromiso","Rotación","Conflicto"],
+correct:1,
+explanation:"Las personas reconocidas suelen comprometerse más."
+},
+{
+question:"¿Qué aumenta el compromiso?",
+options:["Micromanagement","Feedback frecuente","Control excesivo","Castigos"],
+correct:1,
+explanation:"La retroalimentación mantiene claridad."
+},
+{
+question:"La comunicación efectiva debe ser:",
+options:["Ambigua","Clara","Compleja","Indirecta"],
+correct:1,
+explanation:"La claridad reduce errores."
+},
+{
+question:"¿Qué impulsa mejores resultados?",
+options:["Propósito","Miedo","Control","Jerarquía"],
+correct:0,
+explanation:"El propósito conecta personas y resultados."
+},
+{
+question:"¿Qué construye equipos fuertes?",
+options:["Competencia interna","Colaboración","Presión","Castigo"],
+correct:1,
+explanation:"La colaboración mejora desempeño."
+},
+{
+question:"La inclusión significa:",
+options:["Tratar igual a todos","Valorar diferencias","Evitar diversidad","Controlar opiniones"],
+correct:1,
+explanation:"La inclusión aprovecha perspectivas diversas."
+},
+{
+question:"La seguridad psicológica permite:",
+options:["Ocultar errores","Hablar libremente","Evitar feedback","Reducir participación"],
+correct:1,
+explanation:"Permite expresar ideas sin temor."
+},
+{
+question:"Un buen líder desarrolla:",
+options:["Dependencia","Autonomía","Miedo","Competencia negativa"],
+correct:1,
+explanation:"Busca que las personas crezcan."
+},
+{
+question:"¿Qué reduce la rotación?",
+options:["Reconocimiento","Castigo","Micromanagement","Silencio"],
+correct:0,
+explanation:"Las personas valoradas permanecen más tiempo."
+},
+{
+question:"¿Qué define a un manager memorable?",
+options:["Control","Inspiración","Microgestión","Distancia"],
+correct:1,
+explanation:"Los líderes memorables inspiran crecimiento."
+}
+];
